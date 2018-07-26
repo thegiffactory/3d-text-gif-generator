@@ -38,11 +38,45 @@ var createPointLight = function() {
   return light;
 }
 
-var init = function() {
+var renderGif = function (webGlCanvas, animateFunction) {
+  var w = webGlCanvas.width;
+  var h = webGlCanvas.height;
+  var tc = document.createElement('canvas');
+  tc.width = w;
+  tc.height = h;
+  ctx = tc.getContext('2d');
+
+  var gif = new GIF({
+    workers: 2,
+    workerScript: 'node_modules/gif.js/dist/gif.worker.js',
+    quality: 10,
+    width: w,
+    height: h
+  });
+
+  for (var i = 0; i < 60; i++) {
+    ctx.drawImage(webGlCanvas, 0, 0, w, h);
+    gif.addFrame(ctx, {copy: true, delay: 40});
+    animateFunction();
+  }
+
+  gif.on('finished', function(blob) {
+    var img = document.getElementById('result-gif');
+    img.src = URL.createObjectURL(blob);
+  });
+  gif.render()
+}
+
+var init = function(resetButton) {
   var scene = new THREE.Scene();
   var rotatingText = null;
 
   var loader = new THREE.FontLoader();
+  var canvas = document.getElementById('3dcanvas');
+
+  var renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, antialias: true ,canvas: canvas});
+  renderer.setSize(window.innerWidth*0.9, window.innerHeight * 0.9);
+
   loader.load('node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
     rotatingText = createText(font)
     scene.add(rotatingText);
@@ -51,16 +85,24 @@ var init = function() {
     scene.add(dirLight);
     var pointLight = createPointLight();
     scene.add(pointLight);
+
+    resetButton.addEventListener('click', function() {
+      scene.remove(rotatingText);
+      rotatingText = createText(font)
+      scene.add(rotatingText);
+      renderer.render(scene, camera);
+      renderGif(canvas, function() {
+        rotatingText.rotateY(Math.PI/30);
+        renderer.render(scene, camera);
+      });
+    });
   });
 
   var camera = createCamera();
-  var renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth*0.9, window.innerHeight * 0.9);
-  document.body.appendChild(renderer.domElement);
 
   var render = function() {
     if (rotatingText) {
-      rotatingText.rotation.y += 0.01;
+      rotatingText.rotateY(Math.PI/30);
     }
     renderer.render(scene, camera);
   }
@@ -72,4 +114,5 @@ var animate = function (render) {
   render();
 };
 
-init();
+var resetButton = document.getElementById('reset-button');
+init(resetButton);
