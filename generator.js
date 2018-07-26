@@ -51,7 +51,8 @@ var renderGif = function (webGlCanvas, animateFunction) {
     workerScript: 'node_modules/gif.js/dist/gif.worker.js',
     quality: 10,
     width: w,
-    height: h
+    height: h, 
+    transparent: 0x00FF00
   });
 
   for (var i = 0; i < 60; i++) {
@@ -69,6 +70,7 @@ var renderGif = function (webGlCanvas, animateFunction) {
 
 var init = function(resetButton) {
   var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x00FF00);
   var rotatingText = null;
 
   var loader = new THREE.FontLoader();
