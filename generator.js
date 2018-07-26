@@ -1,3 +1,6 @@
+var width = 500;
+var height = 500;
+
 var createText = function(font) {
   var text = new THREE.TextGeometry('OLAR', {
     font: font,
@@ -20,7 +23,7 @@ var createText = function(font) {
 
 var createCamera = function() {
   var cameraTarget = new THREE.Vector3(0, 150, 0);
-  var camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1500);
+  var camera = new THREE.PerspectiveCamera(60, width/height, 0.1, 1500);
   camera.position.set(0, 400, 700);
   camera.lookAt(cameraTarget);
   return camera;
@@ -77,7 +80,7 @@ var init = function(resetButton) {
   var canvas = document.getElementById('3dcanvas');
 
   var renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, antialias: true ,canvas: canvas});
-  renderer.setSize(window.innerWidth*0.9, window.innerHeight * 0.9);
+  renderer.setSize(width, height);
 
   loader.load('node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
     rotatingText = createText(font)
