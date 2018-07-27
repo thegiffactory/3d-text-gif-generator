@@ -51,7 +51,7 @@ var renderGif = function (webGlCanvas, animateFunction) {
 
   var gif = new GIF({
     workers: 2,
-    workerScript: 'node_modules/gif.js/dist/gif.worker.js',
+    workerScript: 'static/gif.worker.js',
     quality: 10,
     width: w,
     height: h,
@@ -82,7 +82,7 @@ var init = function(inputText, inputColor, submitButton) {
   var renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, antialias: true ,canvas: canvas});
   renderer.setSize(width, height);
 
-  loader.load('node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
+  loader.load('static/droid_sans_regular.typeface.json', function (font) {
     rotatingText = createText(font, 0xB22222, '')
     scene.add(rotatingText);
 
