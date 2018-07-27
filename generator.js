@@ -1,8 +1,8 @@
 var width = 500;
 var height = 500;
 
-var createText = function(font) {
-  var text = new THREE.TextGeometry('OLAR', {
+var createText = function(font, displayText) {
+  var text = new THREE.TextGeometry(displayText, {
     font: font,
     size: 70,
     height: 20,
@@ -54,7 +54,7 @@ var renderGif = function (webGlCanvas, animateFunction) {
     workerScript: 'node_modules/gif.js/dist/gif.worker.js',
     quality: 10,
     width: w,
-    height: h, 
+    height: h,
     transparent: 0x00FF00
   });
 
@@ -71,7 +71,7 @@ var renderGif = function (webGlCanvas, animateFunction) {
   gif.render()
 }
 
-var init = function(resetButton) {
+var init = function(inputText, submitButton) {
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x00FF00);
   var rotatingText = null;
@@ -83,7 +83,7 @@ var init = function(resetButton) {
   renderer.setSize(width, height);
 
   loader.load('node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
-    rotatingText = createText(font)
+    rotatingText = createText(font, '')
     scene.add(rotatingText);
 
     var dirLight = createDirectionalLight();
@@ -91,9 +91,9 @@ var init = function(resetButton) {
     var pointLight = createPointLight();
     scene.add(pointLight);
 
-    resetButton.addEventListener('click', function() {
+    submitButton.addEventListener('click', function() {
       scene.remove(rotatingText);
-      rotatingText = createText(font)
+      rotatingText = createText(font, inputText.value)
       scene.add(rotatingText);
       renderer.render(scene, camera);
       renderGif(canvas, function() {
@@ -101,6 +101,7 @@ var init = function(resetButton) {
         renderer.render(scene, camera);
       });
     });
+
   });
 
   var camera = createCamera();
@@ -119,5 +120,6 @@ var animate = function (render) {
   render();
 };
 
-var resetButton = document.getElementById('reset-button');
-init(resetButton);
+var submitButton = document.getElementById('submit-button');
+var inputText = document.getElementById('input-text');
+init(inputText, submitButton);
