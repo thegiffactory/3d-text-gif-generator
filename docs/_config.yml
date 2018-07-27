@@ -1,0 +1,19 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: 3D Text GIF Generator
+email: gifsl@thegiffactory.com
+description: > # this means to ignore newlines until "baseurl:"
+  Animated Text access to everyone!
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://thegiffactory.github.io" # the base hostname & protocol for your site
+twitter_username: thegiffactory
+github_username: thegiffactory
+
+# Build settings
+markdown: kramdown
