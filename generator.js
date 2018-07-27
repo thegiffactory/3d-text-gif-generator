@@ -1,7 +1,7 @@
 var width = 500;
 var height = 500;
 
-var createText = function(font, displayText) {
+var createText = function(font, color, displayText) {
   var text = new THREE.TextGeometry(displayText, {
     font: font,
     size: 70,
@@ -11,7 +11,7 @@ var createText = function(font, displayText) {
   text.computeBoundingBox();
   var centerOffset = -0.5 * (text.boundingBox.max.x - text.boundingBox.min.x);
 
-  var material = new THREE.MeshPhongMaterial({ color: 0xB22222, flatShading: true });
+  var material = new THREE.MeshPhongMaterial({ color: color, flatShading: true });
   var textMesh = new THREE.Mesh(text, material);
   textMesh.position.x = centerOffset;
 
@@ -71,7 +71,7 @@ var renderGif = function (webGlCanvas, animateFunction) {
   gif.render()
 }
 
-var init = function(inputText, submitButton) {
+var init = function(inputText, inputColor, submitButton) {
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x00FF00);
   var rotatingText = null;
@@ -83,7 +83,7 @@ var init = function(inputText, submitButton) {
   renderer.setSize(width, height);
 
   loader.load('node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
-    rotatingText = createText(font, '')
+    rotatingText = createText(font, 0xB22222, '')
     scene.add(rotatingText);
 
     var dirLight = createDirectionalLight();
@@ -93,7 +93,8 @@ var init = function(inputText, submitButton) {
 
     submitButton.addEventListener('click', function() {
       scene.remove(rotatingText);
-      rotatingText = createText(font, inputText.value)
+      var color = parseInt(inputColor.value, 16);
+      rotatingText = createText(font, color, inputText.value)
       scene.add(rotatingText);
       renderer.render(scene, camera);
       renderGif(canvas, function() {
@@ -122,4 +123,5 @@ var animate = function (render) {
 
 var submitButton = document.getElementById('submit-button');
 var inputText = document.getElementById('input-text');
-init(inputText, submitButton);
+var inputColor = document.getElementById('input-color');
+init(inputText, inputColor, submitButton);
