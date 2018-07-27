@@ -10,8 +10,8 @@ title: 3D Text GIF Generator
 email: gifsl@thegiffactory.com
 description: > # this means to ignore newlines until "baseurl:"
   Animated Text access to everyone!
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://thegiffactory.github.io" # the base hostname & protocol for your site
+baseurl: "/3d-text-gif-generator" # the subpath of your site, e.g. /blog
+url: "https://thegiffactory.github.io" # the base hostname & protocol for your site
 twitter_username: thegiffactory
 github_username: thegiffactory
 
