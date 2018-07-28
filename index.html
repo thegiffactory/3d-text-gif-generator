@@ -2,24 +2,59 @@
 <html>
 	<head>
 		<meta charset=utf-8>
-		<title>My first three.js app</title>
+		<title>3D Text Gif Generator</title>
 		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
+            body { margin: 0; }
+            canvas { width: 100%; height: 100% }
+            .container {
+                display: grid;
+                grid-template-rows: 20% 80%;
+            }
+            .menu{
+                display: grid;
+                grid-template-rows: 10% 10% 10% 10%;
+                padding: 10px;
+                align-items: center;
+                text-align: right;
+            }
+            .canvas {
+                display: grid;
+                grid-column-start: 2;
+            }
+            .gif {
+                display: grid;
+                grid-column-start: 2;
+            }
 		</style>
 	</head>
 	<body>
-        <div>
-            <span>Text</span>
-            <input type="text" name="text" id="input-text" value="TEXT HERE">
-            <span>Color</span>
-            <input type="text" name="color" id="input-color" value="B22222">
-            <span>Speed</span>
-            <input type="text" name="speed" id="input-speed" value="60">
-            <button id="submit-button">Submit</button>
+        <div class="container">
+            <div class="menu">
+                <div>
+                    <span>Text</span>
+                    <input type="text" name="text" id="input-text" value="Your animated text">
+                </div>
+                <div>
+                    <span>Color</span>
+                    <input type="text" name="color" id="input-color" value="B22222">
+                </div>
+                <div>
+                    <span>Speed</span>
+                    <input type="text" name="speed" id="input-speed" value="60">
+                </div>
+                <div>
+                    <button id="submit-button">Generate</button>
+                </div>
+            </div>
+
+            <div class="canvas">
+                <canvas id="3dcanvas" class="3dcanvas"> </canvas>
+            </div>
+
+            <div class="gif">
+                <img id="result-gif" class="result-gif"/>
+            </div>
         </div>
-        <canvas id="3dcanvas"> </canvas>
-        <img id="result-gif"/>
 
 		<script src="node_modules/three/build/three.js"></script>
 		<script src="generator.js"></script>

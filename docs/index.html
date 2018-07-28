@@ -3,17 +3,33 @@ layout: default
 ---
 
 <div class="home">
-    <div>
-        <span>Text</span>
-        <input type="text" name="text" id="input-text" value="TEXT HERE">
-        <span>Color</span>
-        <input type="text" name="color" id="input-color" value="B22222">
-        <span>Speed</span>
-        <input type="text" name="speed" id="input-speed" value="60">
-        <button id="submit-button">Submit</button>
+    <div class="container">
+        <div class="menu">
+            <div>
+                <span>Text</span>
+                <input type="text" name="text" id="input-text" value="Your animated text">
+            </div>
+            <div>
+                <span>Color</span>
+                <input type="text" name="color" id="input-color" value="B22222">
+            </div>
+            <div>
+                <span>Speed</span>
+                <input type="text" name="speed" id="input-speed" value="60">
+            </div>
+            <div>
+                <button id="submit-button">Generate</button>
+            </div>
+        </div>
+
+        <div class="canvas">
+            <canvas id="3dcanvas" class="3dcanvas"> </canvas>
+        </div>
+
+        <div class="gif">
+            <img id="result-gif" class="result-gif"/>
+        </div>
     </div>
-    <canvas id="3dcanvas"> </canvas>
-    <img id="result-gif"/>
 
     <script src="./static/three.js"></script>
     <script src="./static/generator.js"></script>
