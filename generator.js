@@ -1,6 +1,5 @@
 var width = 500;
 var height = 500;
-var rotationFactor = 30;
 
 var createText = function(font, color, displayText) {
   var text = new THREE.TextGeometry(displayText, {
@@ -42,7 +41,7 @@ var createPointLight = function() {
   return light;
 }
 
-var renderGif = function (webGlCanvas, animateFunction) {
+var renderGif = function (webGlCanvas, rotationFactor, animateFunction) {
   var w = webGlCanvas.width;
   var h = webGlCanvas.height;
   var tc = document.createElement('canvas');
@@ -74,10 +73,11 @@ var renderGif = function (webGlCanvas, animateFunction) {
   gif.render()
 }
 
-var init = function(inputText, inputColor, submitButton) {
+var init = function(inputText, inputColor, inputSpeed, submitButton) {
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x00FF00);
   var rotatingText = null;
+  var rotationFactor = parseInt(inputSpeed.value);
 
   var loader = new THREE.FontLoader();
   var canvas = document.getElementById('3dcanvas');
@@ -97,10 +97,12 @@ var init = function(inputText, inputColor, submitButton) {
     submitButton.addEventListener('click', function() {
       scene.remove(rotatingText);
       var color = parseInt(inputColor.value, 16);
+      rotationFactor = parseInt(inputSpeed.value);
+
       rotatingText = createText(font, color, inputText.value)
       scene.add(rotatingText);
       renderer.render(scene, camera);
-      renderGif(canvas, function() {
+      renderGif(canvas, rotationFactor, function() {
             rotatingText.rotateY(Math.PI/rotationFactor);
             renderer.render(scene, camera);
       });
@@ -127,4 +129,5 @@ var animate = function (render) {
 var submitButton = document.getElementById('submit-button');
 var inputText = document.getElementById('input-text');
 var inputColor = document.getElementById('input-color');
-init(inputText, inputColor, submitButton);
+var inputSpeed = document.getElementById('input-speed');
+init(inputText, inputColor, inputSpeed,  submitButton);
