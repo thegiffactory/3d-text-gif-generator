@@ -41,7 +41,7 @@ var createPointLight = function() {
   return light;
 }
 
-var renderGif = function (webGlCanvas, animateFunction) {
+var renderGif = function (webGlCanvas, rotationFactor, animateFunction) {
   var w = webGlCanvas.width;
   var h = webGlCanvas.height;
   var tc = document.createElement('canvas');
@@ -58,7 +58,9 @@ var renderGif = function (webGlCanvas, animateFunction) {
     transparent: 0x00FF00
   });
 
-  for (var i = 0; i < 60; i++) {
+  var rotationSlice = Math.PI / rotationFactor;
+  var drawingIterations = (2 * Math.PI) / rotationSlice;
+  for (var i = 0; i < drawingIterations; i++) {
     ctx.drawImage(webGlCanvas, 0, 0, w, h);
     gif.addFrame(ctx, {copy: true, delay: 40});
     animateFunction();
@@ -71,10 +73,11 @@ var renderGif = function (webGlCanvas, animateFunction) {
   gif.render()
 }
 
-var init = function(inputText, inputColor, submitButton) {
+var init = function(inputText, inputColor, inputSpeed, submitButton) {
   var scene = new THREE.Scene();
   scene.background = new THREE.Color(0x00FF00);
   var rotatingText = null;
+  var rotationFactor = parseInt(inputSpeed.value);
 
   var loader = new THREE.FontLoader();
   var canvas = document.getElementById('3dcanvas');
@@ -84,6 +87,7 @@ var init = function(inputText, inputColor, submitButton) {
 
   loader.load('static/droid_sans_regular.typeface.json', function (font) {
     rotatingText = createText(font, 0xB22222, '')
+
     scene.add(rotatingText);
 
     var dirLight = createDirectionalLight();
@@ -94,11 +98,12 @@ var init = function(inputText, inputColor, submitButton) {
     submitButton.addEventListener('click', function() {
       scene.remove(rotatingText);
       var color = parseInt(inputColor.value, 16);
+      rotationFactor = parseInt(inputSpeed.value);
       rotatingText = createText(font, color, inputText.value)
       scene.add(rotatingText);
       renderer.render(scene, camera);
-      renderGif(canvas, function() {
-        rotatingText.rotateY(Math.PI/30);
+      renderGif(canvas, rotationFactor, function() {
+        rotatingText.rotateY(Math.PI/rotationFactor);
         renderer.render(scene, camera);
       });
     });
@@ -109,7 +114,7 @@ var init = function(inputText, inputColor, submitButton) {
 
   var render = function() {
     if (rotatingText) {
-      rotatingText.rotateY(Math.PI/30);
+      rotatingText.rotateY(Math.PI/rotationFactor);
     }
     renderer.render(scene, camera);
   }
@@ -123,5 +128,6 @@ var animate = function (render) {
 
 var submitButton = document.getElementById('submit-button');
 var inputText = document.getElementById('input-text');
+var inputSpeed = document.getElementById('input-speed');
 var inputColor = document.getElementById('input-color');
-init(inputText, inputColor, submitButton);
+init(inputText, inputColor, inputSpeed, submitButton);
