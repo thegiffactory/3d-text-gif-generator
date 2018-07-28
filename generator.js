@@ -1,5 +1,6 @@
 var width = 500;
 var height = 500;
+var rotationFactor = 30;
 
 var createText = function(font, displayText) {
   var text = new THREE.TextGeometry(displayText, {
@@ -58,7 +59,9 @@ var renderGif = function (webGlCanvas, animateFunction) {
     transparent: 0x00FF00
   });
 
-  for (var i = 0; i < 60; i++) {
+  var rotationSlice = Math.PI / rotationFactor;
+  var drawingIterations = (2 * Math.PI) / rotationSlice;
+  for (var i = 0; i < drawingIterations; i++) {
     ctx.drawImage(webGlCanvas, 0, 0, w, h);
     gif.addFrame(ctx, {copy: true, delay: 40});
     animateFunction();
@@ -97,8 +100,8 @@ var init = function(inputText, submitButton) {
       scene.add(rotatingText);
       renderer.render(scene, camera);
       renderGif(canvas, function() {
-        rotatingText.rotateY(Math.PI/30);
-        renderer.render(scene, camera);
+            rotatingText.rotateY(Math.PI/rotationFactor);
+            renderer.render(scene, camera);
       });
     });
 
@@ -107,10 +110,10 @@ var init = function(inputText, submitButton) {
   var camera = createCamera();
 
   var render = function() {
-    if (rotatingText) {
-      rotatingText.rotateY(Math.PI/30);
-    }
-    renderer.render(scene, camera);
+        if (rotatingText) {
+          rotatingText.rotateY(Math.PI/rotationFactor);
+        }
+        renderer.render(scene, camera);
   }
   animate(render);
 }
