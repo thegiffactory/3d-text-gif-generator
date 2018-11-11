@@ -1,6 +1,7 @@
 import {Scene, TextGeometry, MeshPhongMaterial, Mesh, Group, Vector3, 
   PerspectiveCamera, DirectionalLight, PointLight, Color, FontLoader, 
   WebGLRenderer} from 'three';
+import GIF from 'gif.js';
 
 var width = 500;
 var height = 500;
