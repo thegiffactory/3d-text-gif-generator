@@ -5,6 +5,17 @@ module.exports = {
     main: './src/index.js',
     "gif.worker": './node_modules/gif.js/dist/gif.worker.js',
   },
+  module: {
+    rules: [
+      {
+        type: 'javascript/auto',
+        test: /droid_sans_regular\.typeface\.json$/,
+        use: [
+          'url-loader'
+        ]
+      }
+    ]
+  },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
