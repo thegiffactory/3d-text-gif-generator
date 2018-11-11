@@ -56,7 +56,7 @@ var renderGif = function (webGlCanvas, rotationFactor, animateFunction) {
 
   var gif = new GIF({
     workers: 2,
-    workerScript: '../node_modules/gif.js/dist/gif.worker.js',
+    workerScript: 'gif.worker.bundle.js',
     quality: 10,
     width: w,
     height: h,

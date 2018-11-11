@@ -1,9 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js',
+    "gif.worker": './node_modules/gif.js/dist/gif.worker.js',
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   }
 };
