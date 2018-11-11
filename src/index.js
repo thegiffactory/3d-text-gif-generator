@@ -2,6 +2,7 @@ import {Scene, TextGeometry, MeshPhongMaterial, Mesh, Group, Vector3,
   PerspectiveCamera, DirectionalLight, PointLight, Color, FontLoader, 
   WebGLRenderer} from 'three';
 import GIF from 'gif.js';
+import DroidSansRegularFont from './droid_sans_regular.typeface.json';
 
 var width = 500;
 var height = 500;
@@ -90,7 +91,7 @@ var init = function(inputText, inputColor, inputSpeed, submitButton) {
   var renderer = new WebGLRenderer( { preserveDrawingBuffer: true, antialias: true ,canvas: canvas});
   renderer.setSize(width, height);
 
-  loader.load('../node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
+  loader.load(DroidSansRegularFont, function (font) {
     rotatingText = createText(font, 0xB22222, '')
     scene.add(rotatingText);
 
