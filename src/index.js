@@ -1,8 +1,12 @@
+import {Scene, TextGeometry, MeshPhongMaterial, Mesh, Group, Vector3, 
+  PerspectiveCamera, DirectionalLight, PointLight, Color, FontLoader, 
+  WebGLRenderer} from 'three';
+
 var width = 500;
 var height = 500;
 
 var createText = function(font, color, displayText) {
-  var text = new THREE.TextGeometry(displayText, {
+  var text = new TextGeometry(displayText, {
     font: font,
     size: 70,
     height: 20,
@@ -11,32 +15,32 @@ var createText = function(font, color, displayText) {
   text.computeBoundingBox();
   var centerOffset = -0.5 * (text.boundingBox.max.x - text.boundingBox.min.x);
 
-  var material = new THREE.MeshPhongMaterial({ color: color, flatShading: true });
-  var textMesh = new THREE.Mesh(text, material);
+  var material = new MeshPhongMaterial({ color: color, flatShading: true });
+  var textMesh = new Mesh(text, material);
   textMesh.position.x = centerOffset;
 
-  group = new THREE.Group();
+  var group = new Group();
   group.add(textMesh);
   group.position.y = 100;
   return group;
 }
 
 var createCamera = function() {
-  var cameraTarget = new THREE.Vector3(0, 150, 0);
-  var camera = new THREE.PerspectiveCamera(60, width/height, 0.1, 1500);
+  var cameraTarget = new Vector3(0, 150, 0);
+  var camera = new PerspectiveCamera(60, width/height, 0.1, 1500);
   camera.position.set(0, 400, 700);
   camera.lookAt(cameraTarget);
   return camera;
 }
 
 var createDirectionalLight = function() {
-  var light = new THREE.DirectionalLight(0xffffff, 0.125);
+  var light = new DirectionalLight(0xffffff, 0.125);
   light.position.set(0, 0, 1).normalize();
   return light;
 }
 
 var createPointLight = function() {
-  var light = new THREE.PointLight(0xffffff, 1.5);
+  var light = new PointLight(0xffffff, 1.5);
   light.position.set(0, 100, 90);
   return light;
 }
@@ -47,7 +51,7 @@ var renderGif = function (webGlCanvas, rotationFactor, animateFunction) {
   var tc = document.createElement('canvas');
   tc.width = w;
   tc.height = h;
-  ctx = tc.getContext('2d');
+  var ctx = tc.getContext('2d');
 
   var gif = new GIF({
     workers: 2,
@@ -74,15 +78,15 @@ var renderGif = function (webGlCanvas, rotationFactor, animateFunction) {
 }
 
 var init = function(inputText, inputColor, inputSpeed, submitButton) {
-  var scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x00FF00);
+  var scene = new Scene();
+  scene.background = new Color(0x00FF00);
   var rotatingText = null;
   var rotationFactor = parseInt(inputSpeed.value);
 
-  var loader = new THREE.FontLoader();
+  var loader = new FontLoader();
   var canvas = document.getElementById('3dcanvas');
 
-  var renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, antialias: true ,canvas: canvas});
+  var renderer = new WebGLRenderer( { preserveDrawingBuffer: true, antialias: true ,canvas: canvas});
   renderer.setSize(width, height);
 
   loader.load('../node_modules/three/examples/fonts/droid/droid_sans_regular.typeface.json', function (font) {
