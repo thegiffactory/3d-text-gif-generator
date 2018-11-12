@@ -7,6 +7,16 @@ module.exports = {
     main: './src/index.js',
     "gif.worker": './node_modules/gif.js/dist/gif.worker.js',
   },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist/static')
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      filename: '../index.html'
+    })
+  ],
   module: {
     rules: [
       {
@@ -21,15 +31,6 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    })
-  ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
   },
   devtool: 'source-map',
   devServer: {
