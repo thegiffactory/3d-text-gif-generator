@@ -3,6 +3,8 @@ import {Scene, TextGeometry, MeshPhongMaterial, Mesh, Group, Vector3,
   WebGLRenderer} from 'three';
 import GIF from 'gif.js';
 import DroidSansRegularFont from './droid_sans_regular.typeface.json';
+import css from './main.css';
+
 
 var width = 500;
 var height = 500;
