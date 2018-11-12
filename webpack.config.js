@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  mode: 'production',
   entry: {
     main: './src/index.js',
     "gif.worker": './node_modules/gif.js/dist/gif.worker.js',
@@ -14,6 +15,10 @@ module.exports = {
         use: [
           'url-loader'
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },
