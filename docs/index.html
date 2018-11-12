@@ -3,36 +3,36 @@ layout: default
 ---
 
 <div class="home">
-    <div class="container">
-        <div class="menu">
-            <div>
-                <span>Text</span>
-                <input type="text" name="text" id="input-text" value="Your animated text">
+        <div class="container">
+            <div class="menu">
+                <div>
+                    <span>Text</span>
+                    <input type="text" name="text" id="input-text" value="Your animated text">
+                </div>
+                <div>
+                    <span>Color</span>
+                    <input type="text" name="color" id="input-color" value="B22222">
+                </div>
+                <div>
+                    <span>Speed</span>
+                    <input type="text" name="speed" id="input-speed" value="60">
+                </div>
+                <div>
+                    <button id="submit-button">Generate</button>
+                </div>
             </div>
-            <div>
-                <span>Color</span>
-                <input type="text" name="color" id="input-color" value="B22222">
+
+            <div class="canvas">
+                <canvas id="3dcanvas" class="3dcanvas"> </canvas>
             </div>
-            <div>
-                <span>Speed</span>
-                <input type="text" name="speed" id="input-speed" value="60">
-            </div>
-            <div>
-                <button id="submit-button">Generate</button>
+
+            <div class="gif">
+                <img id="result-gif" class="result-gif"/>
             </div>
         </div>
 
-        <div class="canvas">
-            <canvas id="3dcanvas" class="3dcanvas"> </canvas>
-        </div>
-
-        <div class="gif">
-            <img id="result-gif" class="result-gif"/>
-        </div>
-    </div>
-
-    <script src="./static/three.js"></script>
-    <script src="./static/generator.js"></script>
-    <script src="./static/gif.js"></script>
-    <script src="./static/gif.worker.js"></script>
+        <!-- Scripts tags are inserted just before the closing body tag automagically.
+            See injectAssetsIntoHtml function on html-webpack-plugin for more details
+        -->
 </div>
+<script type="text/javascript" src="static/main.bundle.js"></script><script type="text/javascript" src="static/gif.worker.bundle.js"></script>
