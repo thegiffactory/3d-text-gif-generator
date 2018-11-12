@@ -1,33 +1,10 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset=utf-8>
-		<title>3D Text Gif Generator</title>
-		<style>
-            body { margin: 0; }
-            canvas { width: 100%; height: 100% }
-            .container {
-                display: grid;
-                grid-template-rows: 20% 80%;
-            }
-            .menu{
-                display: grid;
-                grid-template-rows: 10% 10% 10% 10%;
-                padding: 10px;
-                align-items: center;
-                text-align: right;
-            }
-            .canvas {
-                display: grid;
-                grid-column-start: 2;
-            }
-            .gif {
-                display: grid;
-                grid-column-start: 2;
-            }
-		</style>
-	</head>
-	<body>
+    <head>
+        <meta charset=utf-8>
+        <title>3D Text Gif Generator</title>
+    </head>
+    <body>
         <div class="container">
             <div class="menu">
                 <div>
@@ -56,9 +33,8 @@
             </div>
         </div>
 
-		<script src="node_modules/three/build/three.js"></script>
-		<script src="generator.js"></script>
-		<script src="node_modules/gif.js/dist/gif.js"></script>
-		<script src="node_modules/gif.js/dist/gif.worker.js"></script>
-	</body>
+        <!-- Scripts tags are inserted just before the closing body tag automagically.
+            See injectAssetsIntoHtml function on html-webpack-plugin for more details
+        -->
+    </body>
 </html>
