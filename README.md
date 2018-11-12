@@ -5,4 +5,4 @@ Help:
 
 - `npm run start` to run webpack-dev-server
 - `npm run build` to build files to dist/ folder
-- `npm run copy-to-docs` to build files and copy them to /docs folder - Github pages curretly reads from this folder
+- `npm run copy-to-docs` to build files and copy them to /docs folder - Github pages currently reads from this folder
