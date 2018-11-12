@@ -10,6 +10,7 @@
     "three": "^0.94.0"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
@@ -18,6 +19,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "build": "webpack --verbose"
+    "build": "webpack --mode=production",
+    "build-dev": "webpack --mode=development"
   }
 }
