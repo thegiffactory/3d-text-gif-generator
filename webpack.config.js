@@ -8,13 +8,13 @@ module.exports = {
     "gif.worker": './node_modules/gif.js/dist/gif.worker.js',
   },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist/static')
+    filename: './static/[name].bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      filename: '../index.html'
+      filename: 'index.html'
     })
   ],
   module: {
