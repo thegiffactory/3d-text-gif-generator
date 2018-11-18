@@ -5,11 +5,21 @@ module.exports = {
   mode: 'production',
   entry: {
     main: './src/index.js',
+    "gif-renderer": './src/gif-renderer.js',
     "gif.worker": './node_modules/gif.js/dist/gif.worker.js',
   },
   output: {
     filename: './static/[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+  performance: {
+    maxAssetSize: 700000, 
+    maxEntrypointSize: 700000, // int (in bytes)
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -23,7 +33,12 @@ module.exports = {
         type: 'javascript/auto',
         test: /droid_sans_regular\.typeface\.json$/,
         use: [
-          'url-loader'
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
         ]
       },
       {
