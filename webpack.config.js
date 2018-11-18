@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'production',
+  cache: true,
   entry: {
     main: './src/index.js',
     "gif-renderer": './src/gif-renderer.js',
